@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Validate TwitterAuth";
+}
+
+@if (@Model != null)
+    {
+    <div class="row Portfolio">
+        <div class="col-md-1 style=" padding: 0px; margin: 0px;}"">
+            <img src=@ViewBag.User.ProfileImageUrl alt="@ViewBag.User.Name" class="img-circle">
+        </div>
+        <div class="col-md-4" style="padding: 0px; margin: 0px;}">
+            <h2>Welcome @Model.Name</h2>
+        </div>
+    </div>
+
+    <hr />
+    <h3>Details Of @ViewBag.User.Name</h3>
+    <div class="row">
+        <ul class="nav nav-pills nav-stacked col-md-4">
+            <li class="active"> <a href="#"> <span class="badge pull-right">@ViewBag.User.FollowersCount</span> Followers </a> </li>
+            <li class="active"> <a href="#"> <span class="badge pull-right">@ViewBag.User.FriendsCount</span> Friends </a> </li>
+            <li class="active"> <a href="#"> <span class="badge pull-right">@ViewBag.User.ListedCount</span> Listed </a> </li>
+        </ul>
+    </div>
+    <br />
+    <br />
+    <hr />
+    <p> Here is the graphical representation of the tweets for past 2 week.</p>
+    <p>On the horizontal line is the date at which the user tweeted. We exclude the dates at which user didn't tweet. (Less headache)</p>
+    <p>On the vertical line is the number  of tweets.</p>
+    <p><strong>Enjoy Guys!!!</strong> , we are building things.</p>
+    <br />
+    <br />
+    <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Partial("LineChart", ViewBag.ProfileGraph as T001.Models.ProfileGraph);
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                @Html.Partial("BarChart", ViewBag.ProfileGraph as T001.Models.ProfileGraph);
+            </div>
+        </div>
+            }
+        else
+            {
+            <h2>Authentication failed!</h2>
+            <p>Something went wrong during the authentication, please <a href="/Home/TwitterAuth">try again</a>!</p>
+            }

@@ -1,0 +1,17 @@
+﻿@using Chart.Mvc.Extensions
+@using Chart.Mvc.ComplexChart
+@model T001.Models.ProfileGraph
+@{
+    const string Canvas = "BarChart";
+    var barChart = new BarChart();
+
+    //barChart.ComplexData.Labels.AddRange(GraphCalculation.label);
+    //barChart.ComplexData.Datasets.AddRange(Graph_Data.Datasets);
+
+    barChart.ComplexData.Labels.AddRange(Model._LineGraph_NoOfTweetsByDate.Label);
+    barChart.ComplexData.Datasets.AddRange(Model._LineGraph_NoOfTweetsByDate.Datasets);
+}
+<h3>@Canvas</h3>
+<canvas id="@Canvas" width="400" height="400"></canvas>
+
+@Html.CreateChart(Canvas, barChart)
