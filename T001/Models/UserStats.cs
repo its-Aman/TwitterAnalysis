@@ -12,6 +12,7 @@ namespace T001.Models
     public class UserStats
         {
         public string UserScreenName;
+        public string UserProfileImage;
         public int UserFollowers;
         public int UserFollowing;
         public int UserListed;
@@ -52,6 +53,7 @@ namespace T001.Models
             UserFollowers = user.FollowersCount;
             UserFollowing = user.FriendsCount;
             UserListed = user.ListedCount;
+            UserProfileImage = user.ProfileImageUrl;
 
             Ratio_Follower_Following = (UserFollowing > 0) ? UserFollowers / Convert.ToDecimal(UserFollowing) : 0;
             Ratio_Listed_100Followers = (UserFollowers > 0) ? UserListed / Convert.ToDecimal(UserFollowers) : 0;

@@ -15,17 +15,19 @@ namespace T001.Model_View
 
         public int noOfTweets;
         public int userTweeted;
+        public string keyword;
 
-        KeywordTweetsDetails mostDetails;
-        KeywordUserDetails userDetails;
-        GetLocation location;
-        GetUserMostHashtags hashtags;
+        public KeywordTweetsDetails mostDetails;
+        public KeywordUserDetails userDetails;
+        public GetLocation location;
+        public GetUserMostHashtags hashtags;
 
 
 
         public View_Keyword(IUser user, string keyword)
             {
             this.user = user;
+            this.keyword = keyword;
             mostDetails = new KeywordTweetsDetails(keyword);
             userDetails = new KeywordUserDetails(keyword);
             location = new GetLocation();

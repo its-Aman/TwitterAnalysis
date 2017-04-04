@@ -266,10 +266,10 @@
     <Content Include="Views\Home\ValidateTwitterAuth.cshtml" />
     <Content Include="Views\Shared\LineChart.cshtml" />
     <Content Include="Views\Shared\BarChart.cshtml" />
+    <Content Include="Views\Main\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Main\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

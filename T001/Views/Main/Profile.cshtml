@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    T001.Models.ProfileGraph pG = ViewBag.ProfileGraph;
+    T001.Model_View.View_Profile vP = ViewBag.ViewProfile;
+    var getMostDetails = vP.mostDetails;
+    var getUserDetails = vP.userDetails;
+    var hashtags = vP.hashtags;
+
+}
+
+<h2>Profile</h2>
+
+<p>
+    @Html.BeginForm("Profile", "Main"){
+    <input type="text" name="userName" value="Model.HandleName" />
+    }
+</p>
+
+@if (@Model != null)
+    {
+    <div class="row Portfolio">
+        <div class="col-md-1 style=" padding: 0px; margin: 0px;}"">
+            <img src=@vP.userStats.UserProfileImage alt="@vP.userStats.UserScreenName" class="img-circle">
+        </div>
+        <div class="col-md-4" style="padding: 0px; margin: 0px;}">
+            <h2>Welcome @vP.userStats.UserScreenName</h2>
+        </div>
+    </div>
+
+    <hr />
+    <h3>Details Of @ViewBag.User.Name</h3>
+    <div class="row">
+        <ul class="list-group col-md-4">
+            <li class="list-group-item"><span class="badge">@vP.userStats.UserFollowers</span>User Followers</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.UserFollowing</span>User Following</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.UserListed</span>User Listed</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.AverageTweetsPerDay</span>Average Tweets Per Day</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.LinksInTweets</span>Links in Tweet</li>
+        </ul>
+        <ul class="list-group col-md-4">
+            <li class="list-group-item"><span class="badge">@vP.userStats.Ratio_Follower_Following</span>Follower/Following</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.Ratio_Listed_100Followers</span>Listed/Follower(100)</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.Ratio_UserMentions_Tweets_Ratio</span>User Mention/Tweet Ratio</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.Ratio_Link_Tweet</span>Links/Tweets</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.UserMentionsWithinTweets</span>User Mention</li>
+        </ul>
+        <ul class="list-group col-md-4">
+            <li class="list-group-item"><span class="badge">@vP.userStats.TweetsAreRetweets</span>Tweets are Re-tweets</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.TweetsAreReplies</span>Tweets are Replies</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.TweetRetweetByOther</span>Tweet Re-tweets by other</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.TweetFavByOther</span>Tweet Favorite by Other</li>
+            <li class="list-group-item"><span class="badge">@vP.userStats.TimesTheTweetsWereRetweeted</span>Times tweets were Re-tweet</li>
+        </ul>
+    </div>
+    
+    <br />
+    <hr />
+    <p> Here is the graphical representation of the tweets for past 2 week.</p>
+    <p>On the vertical line is the number  of tweets.</p>
+    <br />
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Partial("LineChart", pG);
+        </div>
+        <div class="col-md-4 col-md-offset-4">
+            @Html.Partial("BarChart", pG);
+        </div>
+    </div>
+
+    <div class="row">
+
+    </div>
+
+    }
+else
+    {
+    <h2>Authentication failed!</h2>
+    <p>Something went wrong during the authentication, please <a href="/Home/TwitterAuth">try again</a>!</p>
+    }

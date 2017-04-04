@@ -10,7 +10,7 @@ namespace T001.Models
     {
     public class GetUserMostHashtags
         {
-        List<_hashtagDetails> hashtagDetails;
+        public List<_hashtagDetails> hashtagDetails;
 
         public GetUserMostHashtags(IUser user)
             {

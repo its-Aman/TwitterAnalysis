@@ -57,7 +57,7 @@ namespace T001.Controllers
                 MyUser.AuthCredentials = Auth.SetUserCredentials(MyCredentials.CONSUMER_KEY, MyCredentials.CONSUMER_SECRET, MyUser.User.Credentials.AccessToken, MyUser.User.Credentials.AccessTokenSecret) as TwitterCredentials;
                 }
 
-            var _Iuser = Tweetinvi.User.GetUserFromScreenName(MyUser.User.ScreenName);
+            var _Iuser = Tweetinvi.User.GetUserFromScreenName("amit_1683");
             View_Profile vP = new View_Profile(_Iuser);
             View_Connections vC = new View_Connections(_Iuser);
             View_Keyword vK = new View_Keyword(_Iuser, "Love");

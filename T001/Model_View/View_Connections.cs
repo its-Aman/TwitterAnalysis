@@ -12,8 +12,8 @@ namespace T001.Model_View
     public class View_Connections
         {
         //get data for previous seven days
-        GetUserDetails userDetails;
-        GetLocation location;
+        public GetUserDetails userDetails;
+        public GetLocation location;
 
         public static string Mentions;
         public static string AvgMentionsPerDay;
