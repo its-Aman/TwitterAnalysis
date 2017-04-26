@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Profile";
-    T001.Models.ProfileGraph pG = ViewBag.ProfileGraph;
+    T001.Models.Graph pG = ViewBag.Graph;
     T001.Model_View.View_Profile vP = ViewBag.ViewProfile;
     Tweetinvi.Logic.AuthenticatedUser user = ViewBag.User;
 
@@ -219,8 +219,14 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-6">@Html.Partial("BarChart", pG._BarGraph_NoOfTweetsByDayOfWeek)</div>
-        <div class="col-md-6">@Html.Partial("BarChart", pG._BarGraph_NoOfTweetsByHour)</div>
+        <div class="col-md-6">
+            <h3>Graph for Day wise tweets</h3>
+            @Html.Partial("BarChart", pG._BarGraph_NoOfTweetsByDayOfWeek)
+        </div>
+        <div class="col-md-6">
+            <h3>Graph for Hour wise tweets</h3>
+            @Html.Partial("BarChart", pG._BarGraph_NoOfTweetsByHour)
+        </div>
     </div>
 
     }

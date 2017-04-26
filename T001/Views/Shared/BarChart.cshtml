@@ -6,10 +6,7 @@
 @{
     const string Canvas = "BarChart";
     var barChart = new BarChart();
-    string id = Model.LabelText.Replace(" ", "");
-
-    //barChart.ComplexData.Labels.AddRange(GraphCalculation.label);
-    //barChart.ComplexData.Datasets.AddRange(Graph_Data.Datasets);
+    string id = Model.LabelText.Replace(" ", ""); 
 
     barChart.ComplexData.Labels.AddRange(Model.Label);
     barChart.ComplexData.Datasets.AddRange(Model.Datasets);

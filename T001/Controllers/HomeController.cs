@@ -63,7 +63,7 @@ namespace T001.Controllers
             View_Profile vP = new View_Profile(_Iuser);
             View_Connections vC = new View_Connections(_Iuser);
             View_Keyword vK = new View_Keyword(_Iuser, "Love");
-            ProfileGraph pg = new ProfileGraph(_Iuser, DateTime.Today.AddDays(-14), DateTime.Today);
+            Graph pg = new Graph(_Iuser, DateTime.Today.AddDays(-14), DateTime.Today);
 
             ViewBag.View_Profile = vP;
             ViewBag.View_Connections = vC;

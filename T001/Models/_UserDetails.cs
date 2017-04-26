@@ -11,6 +11,7 @@ namespace T001.Models
         public string UserName;
         public string TwitteHandle;
         public string url;
+        public DateTime tweetDate;
 
         // As per the needs
         public int Retweet;

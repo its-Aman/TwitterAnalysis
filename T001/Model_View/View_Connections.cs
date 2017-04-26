@@ -20,15 +20,21 @@ namespace T001.Model_View
         public static string UserMentionYou;
         public static string YourTweetRetweeted;
         public static string YourTweetRetweetedInTotal;
+        public static DateTime FromDate;
+        public static DateTime ToDate;
 
         private IUser user;
+        public Graph profileGraph;
 
         public View_Connections(IUser user)
             {
             this.user = user;
+            ToDate = DateTime.Today;
+            FromDate = DateTime.Today.AddMonths(-1);
 
             location = new GetLocation();
             userDetails = new GetUserDetails(this.user);
+            profileGraph = new Graph(user, FromDate, ToDate);
             }
 
         //first graph

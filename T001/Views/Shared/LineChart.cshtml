@@ -6,10 +6,7 @@
 @{
     const string Canvas = "LineChart";
     var lineChart = new LineChart();
-    string id = Model.LabelText.Replace(" ", "");
-
-    //lineChart.ComplexData.Labels.AddRange(GraphCalculation.label);
-    //lineChart.ComplexData.Datasets.AddRange(GraphLogicData.Datasets);
+    string id = Model.LabelText.Replace(" ", ""); 
 
     lineChart.ComplexData.Labels.AddRange(Model.Label);
     lineChart.ComplexData.Datasets.AddRange(Model.Datasets);

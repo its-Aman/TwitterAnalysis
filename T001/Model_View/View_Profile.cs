@@ -16,7 +16,7 @@ namespace T001.Model_View
         public GetUserDetails userDetails;
         public UserStats userStats;
         public GetUserMostHashtags hashtags;
-        public ProfileGraph profileGraph;
+        public Graph profileGraph;
 
         public static string HandleName;
         public static DateTime FromDate;
@@ -34,7 +34,7 @@ namespace T001.Model_View
             userDetails = new GetUserDetails(user, FromDate, ToDate);
             userStats = new UserStats(user, FromDate, ToDate);
             hashtags = new GetUserMostHashtags(user, FromDate, ToDate);
-            profileGraph = new ProfileGraph(user,FromDate,ToDate);
+            profileGraph = new Graph(user,FromDate,ToDate);
             Tweets_Date = "tweets from " + FromDate.Date.ToString() + " to " + ToDate.Date.ToString();
             }
 

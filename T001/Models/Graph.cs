@@ -6,24 +6,33 @@ using Tweetinvi.Models;
 
 namespace T001.Models
     {
-    public class ProfileGraph
+    public class Graph
         {
         IEnumerable<ITweet> temp;
+        IUser user;
 
         public GraphData _LineGraph_NoOfTweetsByDate;
         public GraphData _BarGraph_NoOfTweetsByDayOfWeek;
         public GraphData _BarGraph_NoOfTweetsByHour;
+        public GraphData _LineGraph_Mentions;
+        public GraphData _LineGraph_Retweets;
 
         private Dictionary<DayOfWeek, string> converterOfDays = new Dictionary<DayOfWeek, string>();
 
-        public ProfileGraph(IUser user, DateTime fromDate, DateTime toDate)
+        public Graph(IUser user, DateTime fromDate, DateTime toDate)
             {
+            this.user = user;
             temp = GetTweets.GetTweetsForKeyowrds(user, true)
                             .Where(x => toDate.Date >= x.CreatedAt.Date && x.CreatedAt.Date >= fromDate.Date);
 
             _LineGraph_NoOfTweetsByDate = new GraphData();
             _BarGraph_NoOfTweetsByDayOfWeek = new GraphData();
             _BarGraph_NoOfTweetsByHour = new GraphData();
+
+            temp = GetTweets.GetTweetsForConnection(user);
+
+            _LineGraph_Mentions = new GraphData();
+            _LineGraph_Retweets = new GraphData();
 
             feedData();
 
@@ -35,6 +44,36 @@ namespace T001.Models
 
             BarGraph_NoOfTweetsByHour();
             _BarGraph_NoOfTweetsByHour.Run();
+
+            LineGraph_Mentions();
+            _LineGraph_Mentions.Run();
+
+            LineGraph_Retweets();
+            _LineGraph_Retweets.Run();
+            }
+
+        public void LineGraph_Mentions()
+            {
+            _LineGraph_Mentions.LabelText = "Tweets in which you are mentions.";
+            temp.ToList().Where(x => (x.CreatedBy.ScreenName != user.ScreenName) && x.UserMentions.Any(y => y.Id == user.Id))
+                .GroupBy(x => x.CreatedAt.Date.ToString("dd. MMM-yy"))
+                .ToList().ForEach(x =>
+                {
+                    _LineGraph_Mentions.Label.Add(x.Key);
+                    _LineGraph_Mentions.Data.Add(x.Count());
+                });
+            }
+
+        public void LineGraph_Retweets()
+            {
+            _LineGraph_Retweets.LabelText = "Tweets in which retweeted by others";
+            temp.ToList().Where(x => (x.CreatedBy.ScreenName == user.ScreenName) && x.RetweetCount > 0)
+                .GroupBy(x => x.CreatedAt.Date.ToString("dd. MMM-yy"))
+                .ToList().ForEach(x =>
+                {
+                    _LineGraph_Retweets.Label.Add(x.Key);
+                    _LineGraph_Retweets.Data.Add(x.Count());
+                });
             }
 
         private void feedData()

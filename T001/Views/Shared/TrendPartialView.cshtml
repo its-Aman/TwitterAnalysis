@@ -1,0 +1,15 @@
+﻿@model List<Tweetinvi.Models.ITweet>
+
+<div class="ScrollStyle">
+    <table class="table table-condensed table-striped">
+        <tbody>
+            @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.FullText</td>
+                </tr>
+                }
+        </tbody>
+    </table>
+</div>
+

@@ -39,7 +39,6 @@ namespace T001.Models
         public GetUserDetails(IUser user, DateTime fromDate, DateTime toDate) : this(user)
             {
             temp = GetTweets.GetTweetsForKeyowrds(user);
-
             GetUserMostRetweet(user, fromDate, toDate);
             GetUserMostRepliesTo(user, fromDate, toDate);
             GetUserMostMention(user, fromDate, toDate);
@@ -78,7 +77,7 @@ namespace T001.Models
                         TwitteHandle = item.Key.ScreenName,
                         UserName = item.Key.Name,
                         ProfileIcon = item.Key.ProfileImageUrl,
-                        url = partialUrl + item.Key.ScreenName
+                        url = partialUrl + item.Key.ScreenName 
                         });
                 });
                 }
@@ -118,7 +117,7 @@ namespace T001.Models
                             UserName = replyToUser.Name,
                             ProfileIcon = replyToUser.ProfileImageUrl,
                             url = partialUrl + replyToUser.ScreenName,
-                            Replies=item.Count()
+                            Replies=item.Count() 
                             });
                         }
                     }

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using T001.Model_View;
 using T001.Models;
+using Tweetinvi;
 using Tweetinvi.Models;
+using Tweetinvi.Parameters;
 
 namespace T001.Controllers
     {
@@ -17,7 +20,7 @@ namespace T001.Controllers
         // GET: Main
         public new ActionResult Profile()
             {
-            ViewBag.ProfileGraph  = new ProfileGraph(currentUser, DateTime.Today.AddDays(-14), DateTime.Today);
+            ViewBag.Graph = new Graph(currentUser, DateTime.Today.AddDays(-14), DateTime.Today);
             ViewBag.ViewProfile = new View_Profile(currentUser);
             ViewBag.User = MyUser.User;
             return View(ViewBag);
@@ -36,6 +39,20 @@ namespace T001.Controllers
         public ActionResult Sentiment()
             {
             return null;
+            }
+        public ActionResult HashtagsAnalysis()
+            {
+            var t = Trends.GetTrendsAt(23424848);
+            return View(t.Trends);
+            }
+        public PartialViewResult TrendResult(string trend)
+            {
+            var tweets = Search.SearchTweets(new SearchTweetsParameters(trend)
+                {
+                SearchType = SearchResultType.Mixed,
+                MaximumNumberOfResults=10
+                }).ToList();
+            return PartialView("TrendPartialView", tweets);
             }
         }
     }
