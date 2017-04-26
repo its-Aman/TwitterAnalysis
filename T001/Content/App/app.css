@@ -3,8 +3,8 @@
 }
 
 .UserImage {
-    margin: 0px;
-    padding: 0px;
+    width: 30px;
+    height: 30px;
 }
 
 .Portfolio {
@@ -14,4 +14,9 @@
 .UserText {
     padding: 0px;
     margin: 0px;
+}
+
+.ScrollStyle {
+    max-height: 250px;
+    overflow-y: scroll;
 }

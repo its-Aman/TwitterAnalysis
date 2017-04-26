@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    <link rel="stylesheet" href="~/Content/App/app.css"></link>
+    <link rel="stylesheet" href="~/Content/App/app.css">
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/Chart.js"></script>
 </head>
@@ -23,9 +23,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Login", "TwitterAuth", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "Profile", "Main")</li>
+                    <li>@Html.ActionLink("Connection", "Connections", "Main")</li>
+                    <li>@Html.ActionLink("Keyword", "Keyword", "Main")</li>
+                    <li>@Html.ActionLink("Sentiment", "Sentiment", "Main")</li>
                 </ul>
             </div>
         </div>

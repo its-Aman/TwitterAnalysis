@@ -14,6 +14,8 @@ namespace T001.Models
         public GraphData _BarGraph_NoOfTweetsByDayOfWeek;
         public GraphData _BarGraph_NoOfTweetsByHour;
 
+        private Dictionary<DayOfWeek, string> converterOfDays = new Dictionary<DayOfWeek, string>();
+
         public ProfileGraph(IUser user, DateTime fromDate, DateTime toDate)
             {
             temp = GetTweets.GetTweetsForKeyowrds(user, true)
@@ -23,11 +25,27 @@ namespace T001.Models
             _BarGraph_NoOfTweetsByDayOfWeek = new GraphData();
             _BarGraph_NoOfTweetsByHour = new GraphData();
 
+            feedData();
+
             LineGraph_NoOfTweetsByDate(fromDate, toDate);
             _LineGraph_NoOfTweetsByDate.Run();
 
             BarGraph_NoOfTweetsByDayOfWeek();
+            _BarGraph_NoOfTweetsByDayOfWeek.Run();
+
             BarGraph_NoOfTweetsByHour();
+            _BarGraph_NoOfTweetsByHour.Run();
+            }
+
+        private void feedData()
+            {
+            converterOfDays.Add(DayOfWeek.Sunday, "Sunday");
+            converterOfDays.Add(DayOfWeek.Monday, "Monday");
+            converterOfDays.Add(DayOfWeek.Tuesday, "Tuesday");
+            converterOfDays.Add(DayOfWeek.Wednesday, "Wednesday");
+            converterOfDays.Add(DayOfWeek.Thursday, "Thursday");
+            converterOfDays.Add(DayOfWeek.Friday, "Friday");
+            converterOfDays.Add(DayOfWeek.Saturday, "Saturday");
             }
 
         public void LineGraph_NoOfTweetsByDate(DateTime fromDate, DateTime toDate)
@@ -61,12 +79,28 @@ namespace T001.Models
 
         public void BarGraph_NoOfTweetsByDayOfWeek()
             {
-            //TODO: amnac-please fix it
+            _BarGraph_NoOfTweetsByDayOfWeek.LabelText = "Tweets By Day of week";
+            string value;
+            temp.GroupBy(x => x.CreatedAt.DayOfWeek).ToList()
+            .ForEach(x =>
+            {
+                if (converterOfDays.TryGetValue(x.Key, out value))
+                    {
+                    _BarGraph_NoOfTweetsByDayOfWeek.Label.Add(value);
+                    _BarGraph_NoOfTweetsByDayOfWeek.Data.Add(x.Count());
+                    }
+            });
             }
 
         public void BarGraph_NoOfTweetsByHour()
             {
-            //TODO: amnac-please fix it
+            _BarGraph_NoOfTweetsByHour.LabelText = "Tweets By Hour of Day";
+            temp.GroupBy(x => x.CreatedAt.Hour).ToList()
+            .ForEach(x =>
+            {
+                _BarGraph_NoOfTweetsByHour.Label.Add(x.Key.ToString());
+                _BarGraph_NoOfTweetsByHour.Data.Add(x.Count());
+            });
             }
         }
     }

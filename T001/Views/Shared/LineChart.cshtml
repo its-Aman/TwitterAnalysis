@@ -1,18 +1,19 @@
 ﻿@using Chart.Mvc.Extensions
 @using Chart.Mvc.ComplexChart
-@model T001.Models.ProfileGraph
+
+@model T001.Models.GraphData
+
 @{
     const string Canvas = "LineChart";
     var lineChart = new LineChart();
+    string id = Model.LabelText.Replace(" ", "");
 
     //lineChart.ComplexData.Labels.AddRange(GraphCalculation.label);
     //lineChart.ComplexData.Datasets.AddRange(GraphLogicData.Datasets);
 
-    lineChart.ComplexData.Labels.AddRange(Model._LineGraph_NoOfTweetsByDate.Label);
-    lineChart.ComplexData.Datasets.AddRange(Model._LineGraph_NoOfTweetsByDate.Datasets);
-
+    lineChart.ComplexData.Labels.AddRange(Model.Label);
+    lineChart.ComplexData.Datasets.AddRange(Model.Datasets);
 }
-<h3>@Canvas</h3>
-<canvas id="@Canvas" width="400" height="400"></canvas>
+<canvas id="@id" width="850" height="400"></canvas>
 
-@Html.CreateChart(Canvas, lineChart)
+@Html.CreateChart(id, lineChart)

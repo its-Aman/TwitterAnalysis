@@ -32,5 +32,10 @@ namespace T001.Controllers
             {
             return View(new View_Keyword(currentUser, keyword));
             }
+
+        public ActionResult Sentiment()
+            {
+            return null;
+            }
         }
     }

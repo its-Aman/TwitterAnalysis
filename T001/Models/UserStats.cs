@@ -56,10 +56,13 @@ namespace T001.Models
             UserProfileImage = user.ProfileImageUrl;
 
             Ratio_Follower_Following = (UserFollowing > 0) ? UserFollowers / Convert.ToDecimal(UserFollowing) : 0;
-            Ratio_Listed_100Followers = (UserFollowers > 0) ? UserListed / Convert.ToDecimal(UserFollowers) : 0;
+            Ratio_Follower_Following = decimal.Round(Ratio_Follower_Following, 2, MidpointRounding.AwayFromZero);
 
+            Ratio_Listed_100Followers = (UserFollowers > 0) ? UserListed / Convert.ToDecimal(UserFollowers) : 0;
+            Ratio_Listed_100Followers = decimal.Round(Ratio_Listed_100Followers, 2, MidpointRounding.AwayFromZero);
 
             AverageTweetsPerDay = Convert.ToDecimal(temp.Count() / ((ToDate - FromDate).TotalDays));
+            AverageTweetsPerDay = decimal.Round(AverageTweetsPerDay, 2, MidpointRounding.AwayFromZero);
 
             foreach (var item in temp)
                 {
@@ -72,7 +75,9 @@ namespace T001.Models
             if (temp.Count() > 0)
                 {
                 Ratio_UserMentions_Tweets_Ratio = UserMentionsWithinTweets / Convert.ToDecimal(temp.Count());
+                Ratio_UserMentions_Tweets_Ratio = decimal.Round(Ratio_UserMentions_Tweets_Ratio, 2, MidpointRounding.AwayFromZero);
                 Ratio_Link_Tweet = LinksInTweets / Convert.ToDecimal(temp.Count());
+                Ratio_Link_Tweet = decimal.Round(Ratio_Link_Tweet, 2, MidpointRounding.AwayFromZero);
                 }
 
             LinksInTweets = temp.Where(x => x.Entities.Urls.Count > 0).Count();

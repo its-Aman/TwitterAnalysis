@@ -62,14 +62,14 @@ namespace T001.Models
                 TweetSearchType = TweetSearchType.RetweetsOnly,
                 Since = FromDate.Date,
                 Until = ToDate.Date
-                });
+                }).ToList();
 
             if (temp != null)
                 {
-                temp.ToList().ForEach(x => mostRT.Add(x.RetweetedTweet.CreatedBy));
+                temp.ForEach(x => mostRT.Add(x.RetweetedTweet.CreatedBy));
                 mostRT.GroupBy(x => x).OrderByDescending(x => x.Count()).ToList().ForEach(item =>
                 {
-                    _GetUserMostRetweet.Add(new _UserDetails
+                   _GetUserMostRetweet.Add(new _UserDetails
                         {
                         Follower = item.Key.FollowersCount,
                         Following = item.Key.FriendsCount,
@@ -117,7 +117,8 @@ namespace T001.Models
                             TwitteHandle = replyToUser.ScreenName,
                             UserName = replyToUser.Name,
                             ProfileIcon = replyToUser.ProfileImageUrl,
-                            url = partialUrl + replyToUser.ScreenName
+                            url = partialUrl + replyToUser.ScreenName,
+                            Replies=item.Count()
                             });
                         }
                     }

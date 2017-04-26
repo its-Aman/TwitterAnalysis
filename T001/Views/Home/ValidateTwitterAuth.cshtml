@@ -5,6 +5,7 @@
     T001.Model_View.View_Keyword vK = ViewBag.View_Keyword;
     Tweetinvi.Logic.AuthenticatedUser user = ViewBag.User;
     T001.Models.ProfileGraph pG = ViewBag.ProfileGraph;
+
 }
 
 @if (@Model != null)
@@ -40,72 +41,84 @@
 
     <div class="row">
         <div class="col-md-6">
-            @Html.Partial("LineChart", ViewBag.ProfileGraph as T001.Models.ProfileGraph);
+            @Html.Partial("LineChart", pG._LineGraph_NoOfTweetsByDate);
         </div>
         <div class="col-md-6">
-            @Html.Partial("BarChart", ViewBag.ProfileGraph as T001.Models.ProfileGraph);
+            @Html.Partial("BarChart", pG._LineGraph_NoOfTweetsByDate);
         </div>
     </div>
     <div class="row">
         <h4>Most Favorite Tweets</h4>
-        <ul class="list-group col-md-6">
-            @foreach (var item in vP.mostDetails._GetMostFavouriteTweets)
-                {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
-                }
-        </ul>
+        <div class="ScrollStyle">
+            <ul class="list-group col-md-6">
+                @foreach (var item in vP.mostDetails._GetMostFavouriteTweets)
+                    {
+                    <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
+                    }
+            </ul>
+        </div>
     </div>
 
     <h3>Profile</h3>
     <div>
         <div class="row">
             <h4>Most Re-tweeted Tweets</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vP.mostDetails._GetMostRetweetedTweets)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vP.mostDetails._GetMostRetweetedTweets)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>User's Most Re-tweeted Tweets</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vP.userDetails._GetUserMostRetweet)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vP.userDetails._GetUserMostRetweet)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.tweet : @item.Retweet</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.tweet : @item.Retweet</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>User's Most Mention</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vP.userDetails._GetUserMostMention)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vP.userDetails._GetUserMostMention)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.tweet : @item.Mention</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.tweet : @item.Mention</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>User's Most Replies</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vP.userDetails._GetUserMostRepliesTo)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vP.userDetails._GetUserMostRepliesTo)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Replies</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Replies</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>User used the Hash-tags</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vP.hashtags.hashtagDetails)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vP.hashtags.hashtagDetails)
                     {
-                <li class="list-group-item">@item.hashtag : @item.hashtagsCount</li>
-                    }
-            </ul>
+                        <li class="list-group-item">@item.hashtag : @item.hashtagsCount</li>
+                        }
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -113,22 +126,26 @@
     <div>
         <div class="row">
             <h4>Most Followed that Mention You</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vC.userDetails._MostFollowedUsersThatMentionedYou)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vC.userDetails._MostFollowedUsersThatMentionedYou)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Mention</a></li>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Mention</a></li>
                         }
-            </ul>
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>User Who Mention You The Most</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vC.userDetails._UsersWhoMentionedYouTheMost)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vC.userDetails._UsersWhoMentionedYouTheMost)
                     {
-                <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Mention</a></li>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Mention</a></li>
                         }
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -136,52 +153,62 @@
     <div>
         <div class="row">
             <h4>Recent Tweets</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vK.mostDetails._GetRecentTweets)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vK.mostDetails._GetRecentTweets)
                     {
-                    <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>Most Re-tweeted Tweets</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vK.mostDetails._GetMostRetweetedTweets)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vK.mostDetails._GetMostRetweetedTweets)
                     {
-                    <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>Most Favorite Tweets</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vK.mostDetails._GetMostFavouriteTweets)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vK.mostDetails._GetMostFavouriteTweets)
                     {
-                    <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.TweetText</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>Most Followed User that uses this keyword</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vK.userDetails._GetMostFollowedUsers)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vK.userDetails._GetMostFollowedUsers)
                     {
-                    <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Follower</a></li>
-                    }
-            </ul>
+                        <li class="list-group-item"><a href="@item.url">@item.UserName : @item.TwitteHandle : @item.Follower</a></li>
+                        }
+                </ul>
+            </div>
         </div>
 
         <div class="row">
             <h4>Hash-tags</h4>
-            <ul class="list-group col-md-6">
-                @foreach (var item in vK.hashtags.hashtagDetails)
+            <div class="ScrollStyle">
+                <ul class="list-group col-md-6">
+                    @foreach (var item in vK.hashtags.hashtagDetails)
                     {
-                    <li class="list-group-item">@item.hashtag  : @item.hashtagsCount</li>
-                    }
-            </ul>
+                        <li class="list-group-item">@item.hashtag  : @item.hashtagsCount</li>
+                        }
+                </ul>
+            </div>
         </div>
 
     </div>
