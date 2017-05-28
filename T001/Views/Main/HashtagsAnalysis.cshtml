@@ -1,36 +1,49 @@
 ﻿@using System.Linq;
 @model List<Tweetinvi.Models.ITrend>
 @{
-    ViewBag.Title = "HashtagsAnalysis";
+    ViewBag.Title = "Hash-tags Analysis";
 }
 
-<h2>Hash-tags Analysis</h2>
+<h2>@ViewBag.Title</h2>
 
-<div class="row">
-    <div class="col-md-6" id="SelectTrends">
-        <h3>Trends:</h3><br />
-        <div class="ScrollStyle">
-            <table class="table table-condensed table-striped">
-                <tbody>
-                    @{
-                        foreach (var item in Model)
-                            {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.TweetVolume</td>
-                                <td>@Ajax.ActionLink("Details", "TrendResult", "Main", new { trend = @item.Name }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "target" })</td>
-                            </tr>
-                            }
-                    }
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col-md-6" id="SelectTrends">
+            <h3>Trends:</h3><br />
+            <div class="ScrollStyle">
+                <table class="table table-condensed table-striped">
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.TweetVolume</td>
+                                    <td>
+                                        @Ajax.ActionLink("Details",
+                                                     "TrendResult",
+                                                     null,
+                                                     new { trend = @item.Name },
+                                                     new AjaxOptions
+                                                         {
+                                                         HttpMethod = "GET",
+                                                         InsertionMode = InsertionMode.Replace,
+                                                         UpdateTargetId = "target"
+                                                         })
+                                    </td>
+
+
+
+                                </tr>
+                                }
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="col-md-6">
+            <h3>Tweets : </h3>
+            <div id="target"></div>
+        </div>
+
     </div>
-
-    <div class="col-md-6">
-        <h3>Tweets : </h3>
-        <div id="target"></div>
-    </div>
-
-</div>
-

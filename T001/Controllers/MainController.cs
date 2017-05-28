@@ -38,21 +38,28 @@ namespace T001.Controllers
 
         public ActionResult Sentiment()
             {
-            return null;
+            return View();
             }
         public ActionResult HashtagsAnalysis()
             {
             var t = Trends.GetTrendsAt(23424848);
             return View(t.Trends);
             }
-        public PartialViewResult TrendResult(string trend)
+        public ActionResult TrendResult(string trend)
             {
-            var tweets = Search.SearchTweets(new SearchTweetsParameters(trend)
+            if (Request.IsAjaxRequest() && !string.IsNullOrEmpty(trend))
                 {
-                SearchType = SearchResultType.Mixed,
-                MaximumNumberOfResults=10
-                }).ToList();
-            return PartialView("TrendPartialView", tweets);
+                var tweets = Search.SearchTweets(new SearchTweetsParameters(trend)
+                    {
+                    SearchType = SearchResultType.Mixed,
+                    MaximumNumberOfResults = 20
+                    }).ToList();
+                return PartialView("TrendResult", tweets);
+                }
+            else
+                {
+                return View();
+                }
             }
         }
     }
